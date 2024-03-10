@@ -35,12 +35,19 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
+
+
+
+
+
         $user = Auth::user();
 
 
         $validated = $request->validated();
 
         $article = $user->articles()->create($validated);
+
+
 
         $article->image = "public/images/default.jpg";
         if ($request->hasFile('image')) {
@@ -88,6 +95,9 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $validated = $request->validated();
         $article->update($validated);
+        $article->update($request->all());
+        $article->categories()->detach();
+        $article->categories()->attach($request->categories);
 
         if ($request->hasFile('image')) {
 
@@ -99,9 +109,8 @@ class ArticleController extends Controller
             $image = $path . '/' . $name;
 
             $article->image = $image;
-            $article->save();
         }
-
+        $article->save();
 
         return redirect()->back()->with(['success' => 'Articolo modificato con successo']);
     }
@@ -112,8 +121,11 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         $article = Article::find($id);
+        $article->categories()->detach();
         $article->delete();
         Storage::delete($article->image);
+
+        return redirect()->back()->with(['delete' => 'Articolo eliminato con successo']);
     }
 
 

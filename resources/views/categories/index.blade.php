@@ -1,5 +1,6 @@
 <x-layout>
-   <x-delete/>
+    <x-delete />
+    <button class="btn btn-primary"><a href="{{ route('categories.create') }}"> categoria</a></button>
     <table class="table">
         <thead>
             <tr>
@@ -15,11 +16,13 @@
                     <td>{{ $category->name }}</td>
                     <td>
                         <button class="btn btn-secondary"><a
-                                href="{{ route('categories.edit', ['category' => $category->id]) }}">Modifica</a> </button>
-                        <form action="{{route('categories.destroy',['category' => $category->id])}}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <button class="btn btn-danger">Elimina</button></form>
+                                href="{{ route('categories.edit', ['category' => $category->id]) }}">Modifica</a>
+                        </button>
+                        <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Elimina</button>
+                        </form>
 
 
                     </td>

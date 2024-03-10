@@ -10,16 +10,13 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name'];
+    protected $fillable = ['name'];
 
-    // belongsTo  
-    // hasOne
-    // hasMany
-    // belongsToMany
 
-    public function articles(){
 
-        return $this->hasMany(Article::class);
+    public function articles()
+    {
 
+        return $this->belongsToMany(Article::class);
     }
 }

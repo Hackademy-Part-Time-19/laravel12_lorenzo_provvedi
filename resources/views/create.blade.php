@@ -1,11 +1,11 @@
 <x-layout>
 
-    
-    <x-success/>
 
-    
+    <x-success />
+
+
     {{-- <ul>
-        @foreach ( $errors->all() as $error)
+        @foreach ($errors->all() as $error)
             <li class="text-danger">{{$error}}</li>
         @endforeach
     </ul> --}}
@@ -14,29 +14,38 @@
         <h1>Crea il tuo articolo</h1>
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}">
+            <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            @error('title') <div><span class="text-danger">{{$message}}</span></div>@enderror
+            @error('title')
+                <div><span class="text-danger">{{ $message }}</span></div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <input type="text" name="description" class="form-control" id="description" value="{{old('description')}}">
-            @error('description') <div><span class="text-danger">{{$message}}</span></div>@enderror
+            <input type="text" name="description" class="form-control" id="description"
+                value="{{ old('description') }}">
+            @error('description')
+                <div><span class="text-danger">{{ $message }}</span></div>
+            @enderror
         </div>
         <div class="mb-3">
-            <label for="category" class="form-label">Categoria</label>
-            <select name="category_id" class="form-select"  id="category" aria-label="Default select example">
-                <option selected value="">--scegli una categoria--</option>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
                 @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
+                    <input name="categories[]"type="checkbox" class="btn-check" id="btncheck.{{ $category->id }}"
+                        autocomplete="off" value="{{ $category->id }}">
+                    <label class="btn btn-outline-primary"
+                        for="btncheck.{{ $category->id }}">{{ $category->name }}</label>
                 @endforeach
-              </select> 
-            @error('category_id') <div><span class="text-danger">{{$message}}</span></div>@enderror
+
+            </div>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
-            <input type="file" name="image" class="form-control" id="image" value="{{old('image')}}"> 
-            @error('image') <div><span class="text-danger">{{$message}}</span></div>@enderror
+            <input type="file" name="image" class="form-control" id="image" value="{{ old('image') }}">
+            @error('image')
+                <div><span class="text-danger">{{ $message }}</span></div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary">Salva</button>
 

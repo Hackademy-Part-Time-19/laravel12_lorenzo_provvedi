@@ -13,7 +13,6 @@ class ArticleStoreRequest extends FormRequest
     {
         //se l'utente è un admin 
         return true;
-        
     }
 
     /**
@@ -26,19 +25,19 @@ class ArticleStoreRequest extends FormRequest
         return [
             'title' => 'required|max:100',
             'description' => 'required|min:10',
-            'category_id'=> 'required',
+
             'image' => 'image'
         ];
     }
-    
+
     public function messages()
     {
         return [
-            'title.required'=>'Il titolo deve esistere',
-            'title.max'=>'Il titolo essere meno di 100 caratteri',
-            'description.required'=>'La descrizione deve essere inserita',
-            'description.min'=>'La descrizione deve avere più di 10 caratteri',
-            'category_id.required'=>'La categoria deve essere selezionata',
+            'title.required' => 'Il titolo deve esistere',
+            'title.max' => 'Il titolo essere meno di 100 caratteri',
+            'description.required' => 'La descrizione deve essere inserita',
+            'description.min' => 'La descrizione deve avere più di 10 caratteri',
+
         ];
     }
 }

@@ -14,11 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         // $articles = Category::find(1)->articles()->get();
-        $articles = Category::find(1)->articles;
 
-        $category= Article::find(9)->category;
-
-        dd($category);
         return view('categories.index');
     }
 
@@ -27,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -35,7 +31,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create(['name' => $request->name]);
+        return redirect()->route('categories.index')->with(['success' => 'Categoria salvata con successo']);
     }
 
     /**
@@ -51,7 +48,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit',compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -62,8 +59,8 @@ class CategoryController extends Controller
         // $category->name = $request->name;
         // $category->save();
 
-        $category->update(['name'=>$request->name]);
-        return redirect()->back()->with('success','Categoria modficata correttamente');
+        $category->update(['name' => $request->name]);
+        return redirect()->back()->with('success', 'Categoria modficata correttamente');
     }
 
     /**
@@ -72,6 +69,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->back()->with('delete','Categoria eliminata correttamente');
+        return redirect()->back()->with('delete', 'Categoria eliminata correttamente');
     }
 }
